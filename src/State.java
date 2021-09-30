@@ -11,6 +11,8 @@ public class State {
 	public State(String n,String v) {
 		name = n;
 		value = v;
+		inputs = new ArrayList<>();
+		outputs = new ArrayList<>();
 	}
 
 	public State(String n) {

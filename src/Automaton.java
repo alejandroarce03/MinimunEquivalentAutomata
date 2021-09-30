@@ -14,6 +14,8 @@ public class Automaton {
 	
 
 	public Automaton(String type,String pstates, String prelations) {
+		states = new ArrayList<>();
+		relations = new ArrayList<>();
 		typeAutomaton(type, pstates,prelations);
 	}
 
@@ -27,7 +29,7 @@ public class Automaton {
 		}
 	}
 	
-	/*
+	
 	public void dfs() {
 		
 		for (int i=0;i<states.size();i++) {
@@ -38,22 +40,21 @@ public class Automaton {
 		Stack<State> stack = new Stack<State>();
 		State firstState = states.get(0);
 		stack.push(firstState);
-
+		int i = 0;
 		while (!stack.isEmpty()){
 			State curr = stack.pop();
-			int ind = index.get(curr);
-			visited[ind] = true;
-			states.get(ind).setVisited(true);
-
-			for (State s : current.getSuccessorStates()) {
-				if (!visited[index.get(s)]) {
+			visited[i] = true;
+			states.get(i).setVisited(true);
+			i++;
+			for (State s : getSuccessors(curr)) {
+				if (!s.getVisited()) {
 					stack.push(s);
 				}
 			}
 			
 		}
 	}
-	*/
+	
 
 	public void generateMealyAutomaton(String pstates, String prelations) {
 
@@ -68,7 +69,7 @@ public class Automaton {
 
 		for(int i=0;i>relationsStrings.length;i++) {
 			String[] relationsInOut = relationsStrings[i].split(",");
-			Relation r = new Relation(relationsInOut[0],relationsInOut[1],relationsInOut[2],relationsInOut[3]);
+			Relation r = new Relation(relationsInOut[0],relationsInOut[1],searchState(relationsInOut[2]),searchState(relationsInOut[3]));
 			relations.add(r);
 		}
 		connectStatesRelations();
@@ -89,26 +90,56 @@ public class Automaton {
 
 		for(int i=0;i>relationsStrings.length;i++) {
 			String[] relationsInOut = relationsStrings[i].split(",");
-			Relation r = new Relation(relationsInOut[0],relationsInOut[2],relationsInOut[3]);
+			Relation r = new Relation(relationsInOut[0],searchState(relationsInOut[1]),searchState(relationsInOut[2]));
 			relations.add(r);
 		}
 		connectStatesRelations();
 
 	}
 	
+	public State searchState(String name) {
+		State found = null;
+		for(State s : states) {
+			if(s.getName().equalsIgnoreCase(name)) {
+				found = s;
+			}
+		}
+		return found;
+	}
+	
 	public void connectStatesRelations(){
 		for(int i=0;i<states.size();i++) {
 			for(int j=0;j<relations.size();j++) {
-				String state = states.get(i).getName();
-					if(state.equalsIgnoreCase(relations.get(j).getSourceState())) {
+				State state = states.get(i);
+					if(state == relations.get(j).getSourceState()) {
 						states.get(i).getOutputs().add(relations.get(j));
 					}
-					if(state.equalsIgnoreCase(relations.get(j).getDestinationState())) {
+					if(state == relations.get(j).getDestinationState()) {
 						states.get(i).getInputs().add(relations.get(j));
 					}
 				
 			}
 		}
+	}
+	
+	public void removeInaccessibleStates() {
+		dfs();
+		for(int i=0;i<states.size();i++) {
+			if(states.get(i).getInputs() == null   [[]]) {
+				states.remove(i);
+			}
+			if()
+		}
+	}
+	
+	public ArrayList<State> getSuccessors(State s){
+		ArrayList<State> successors = new ArrayList<>();
+		for(int i=0;i<s.getOutputs().size();i++) {
+			Relation r = s.getOutputs().get(i);
+			successors.add(r.getDestinationState());
+		}
+		
+		return successors;
 	}
 
 

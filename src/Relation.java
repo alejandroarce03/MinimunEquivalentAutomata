@@ -3,17 +3,17 @@ public class Relation {
 	
 	private String input;
 	private String output;
-	private String sourceState;
-	private String destinationState;
+	private State sourceState;
+	private State destinationState;
 	
-	public Relation(String i,String o,String srcState,String dstState) {
+	public Relation(String i,String o,State srcState,State dstState) {
 		input = i;
 		output = o;
 		sourceState = srcState;
 		destinationState = dstState;
 	}
 	
-	public Relation(String i,String srcState,String dstState) {
+	public Relation(String i,State srcState,State dstState) {
 		input = i;
 		sourceState = srcState;
 		destinationState = dstState;
@@ -35,21 +35,12 @@ public class Relation {
 		this.output = output;
 	}
 
-	public String getSourceState() {
+	public State getSourceState() {
 		return sourceState;
 	}
 
-	public void setSourceState(String sourceState) {
-		this.sourceState = sourceState;
-	}
-
-	public String getDestinationState() {
+	public State getDestinationState() {
 		return destinationState;
 	}
 
-	public void setDestinationState(String destinationState) {
-		this.destinationState = destinationState;
-	}
-	
-	
 }
