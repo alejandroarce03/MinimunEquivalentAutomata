@@ -46,7 +46,7 @@ public class Automaton {
 			visited[i] = true;
 			states.get(i).setVisited(true);
 			i++;
-			for (State s : getSuccessors(curr)) {
+			for (State s : curr.getSuccessors()) {
 				if (!s.getVisited()) {
 					stack.push(s);
 				}
@@ -123,24 +123,23 @@ public class Automaton {
 	}
 	
 	public void removeInaccessibleStates() {
+		
 		dfs();
 		for(int i=0;i<states.size();i++) {
-			if(states.get(i).getInputs() == null   [[]]) {
+			if(states.get(i).getInputs() == null  || !states.get(i).getVisited()) {
+				//relations.removeAll(states.get(i).getOutputs());
+				states.get(i).getOutputs().clear();
 				states.remove(i);
 			}
-			if()
 		}
 	}
 	
-	public ArrayList<State> getSuccessors(State s){
-		ArrayList<State> successors = new ArrayList<>();
-		for(int i=0;i<s.getOutputs().size();i++) {
-			Relation r = s.getOutputs().get(i);
-			successors.add(r.getDestinationState());
-		}
+	
+	public ArrayList<ArrayList<State>> firstPartition(){
 		
-		return successors;
+		
 	}
+	
 
 
 }

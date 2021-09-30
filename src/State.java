@@ -58,4 +58,14 @@ public class State {
 	public void setVisited(boolean visited) {
 		this.visited=visited;
 	}
+	
+	public ArrayList<State> getSuccessors(){
+		ArrayList<State> successors = new ArrayList<>();
+		for(int i=0;i<outputs.size();i++) {
+			Relation r = outputs.get(i);
+			successors.add(r.getDestinationState());
+		}
+		
+		return successors;
+	}
 }
