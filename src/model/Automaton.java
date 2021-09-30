@@ -1,3 +1,4 @@
+package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
@@ -132,12 +133,6 @@ public class Automaton {
 				states.remove(i);
 			}
 		}
-	}
-	
-	
-	public ArrayList<ArrayList<State>> firstPartition(){
-		
-		
 	}
 	
 
