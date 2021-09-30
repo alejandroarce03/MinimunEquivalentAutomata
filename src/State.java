@@ -6,6 +6,7 @@ public class State {
 	private String value;
 	private ArrayList<Relation> inputs;
 	private ArrayList<Relation> outputs;
+	private boolean visited;
 	
 	public State(String n,String v) {
 		name = n;
@@ -48,5 +49,11 @@ public class State {
 		this.outputs = outputs;
 	}
 	
+	public boolean getVisited() {
+		return visited;
+	}
 	
+	public void setVisited(boolean visited) {
+		this.visited=visited;
+	}
 }

@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Stack;
 
-public class Automata {
+public class Automaton {
 	
 	public final static String MOORE = "Moore";
 	public final static String MEALY = "Mealy";
@@ -8,24 +10,52 @@ public class Automata {
 	private ArrayList<State> states;
 	private ArrayList<Relation> relations;
 	private String type;
-	
+	private HashMap<Integer,String> statesAutomaton;
 	
 
-	public Automata(String type,String pstates, String prelations) {
-		typeAutomata(type, pstates,prelations);
+	public Automaton(String type,String pstates, String prelations) {
+		typeAutomaton(type, pstates,prelations);
 	}
 
-	public void typeAutomata(String type,String pstates, String prelations) {
+	public void typeAutomaton(String type,String pstates, String prelations) {
 		if(type.equalsIgnoreCase("Mealy")) {
-			generateMealyAutomata(pstates,prelations);
+			generateMealyAutomaton(pstates,prelations);
 			type=MEALY;
 		}else {
-			generateMooreAutomata(pstates,prelations);
+			generateMooreAutomaton(pstates,prelations);
 			type=MOORE;
 		}
 	}
+	
+	/*
+	public void dfs() {
+		
+		for (int i=0;i<states.size();i++) {
+			states.get(i).setVisited(false);
+		}
+		
+		boolean[] visited = new boolean[states.size()];
+		Stack<State> stack = new Stack<State>();
+		State firstState = states.get(0);
+		stack.push(firstState);
 
-	public void generateMealyAutomata(String pstates, String prelations) {
+		while (!stack.isEmpty()){
+			State curr = stack.pop();
+			int ind = index.get(curr);
+			visited[ind] = true;
+			states.get(ind).setVisited(true);
+
+			for (State s : current.getSuccessorStates()) {
+				if (!visited[index.get(s)]) {
+					stack.push(s);
+				}
+			}
+			
+		}
+	}
+	*/
+
+	public void generateMealyAutomaton(String pstates, String prelations) {
 
 		String[] statesStrings = pstates.split(";");
 
@@ -45,7 +75,7 @@ public class Automata {
 
 	}
 
-	public void generateMooreAutomata(String pstates, String prelations) {
+	public void generateMooreAutomaton(String pstates, String prelations) {
 
 		String[] statesStrings = pstates.split(";");
 
