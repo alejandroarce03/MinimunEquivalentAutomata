@@ -11,13 +11,56 @@ public class Automaton {
 	private ArrayList<State> states;
 	private ArrayList<Relation> relations;
 	private String type;
-	private HashMap<Integer,String> statesAutomaton;
+	private HashMap<State, Integer> statesAutomaton;
 	
 
+	
+	
+	
 	public Automaton(String type,String pstates, String prelations) {
 		states = new ArrayList<>();
 		relations = new ArrayList<>();
-		typeAutomaton(type, pstates,prelations);
+		typeAutomaton(type, pstates,prelations);	
+		statesAutomaton = new HashMap<>();
+		
+	} 
+	public ArrayList<State> getStates() {
+		return states;
+	}
+
+	public void setStates(ArrayList<State> states) {
+		this.states = states;
+	}
+
+	public ArrayList<Relation> getRelations() {
+		return relations;
+	}
+
+	public void setRelations(ArrayList<Relation> relations) {
+		this.relations = relations;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public HashMap<State,Integer> getStatesAutomaton() {
+		return statesAutomaton;
+	}
+
+	public void setStatesAutomaton(HashMap<State, Integer> statesAutomaton) {
+		this.statesAutomaton = statesAutomaton;
+	}
+	public void generateStatesAutomaton(){
+		for (int i = 0; i < states.size(); i++) {
+			statesAutomaton.put(states.get(i),i);
+			
+		}
+		
 	}
 
 	public void typeAutomaton(String type,String pstates, String prelations) {
@@ -134,6 +177,22 @@ public class Automaton {
 			}
 		}
 	}
+	
+	public ArrayList<ArrayList<State>> getFirstPartition(){
+		
+		removeInaccessibleStates();
+		ArrayList<State> cState = 
+		
+		
+		ArrayList<State> flagState =
+		return null;
+		
+		
+		
+	}
+
+	
+	
 	
 
 
