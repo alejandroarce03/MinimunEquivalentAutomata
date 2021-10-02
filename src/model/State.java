@@ -69,4 +69,8 @@ public class State {
 		
 		return successors;
 	}
+	public void addSuccesor(Relation s) {
+		outputs.add(s);
+		
+	}
 }

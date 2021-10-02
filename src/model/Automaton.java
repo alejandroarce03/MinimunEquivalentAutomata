@@ -1,10 +1,11 @@
 package model;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Stack;
 
 public class Automaton {
-	
+
 	public final static String MOORE = "Moore";
 	public final static String MEALY = "Mealy";
 
@@ -12,17 +13,17 @@ public class Automaton {
 	private ArrayList<Relation> relations;
 	private String type;
 	private HashMap<State, Integer> statesAutomaton;
-	
 
-	
-	
-	
+
+
+
+
 	public Automaton(String type,String pstates, String prelations) {
 		states = new ArrayList<>();
 		relations = new ArrayList<>();
 		typeAutomaton(type, pstates,prelations);	
 		statesAutomaton = new HashMap<>();
-		
+
 	} 
 	public ArrayList<State> getStates() {
 		return states;
@@ -58,9 +59,9 @@ public class Automaton {
 	public void generateStatesAutomaton(){
 		for (int i = 0; i < states.size(); i++) {
 			statesAutomaton.put(states.get(i),i);
-			
+
 		}
-		
+
 	}
 
 	public void typeAutomaton(String type,String pstates, String prelations) {
@@ -72,14 +73,14 @@ public class Automaton {
 			type=MOORE;
 		}
 	}
-	
-	
+
+
 	public void dfs() {
-		
+
 		for (int i=0;i<states.size();i++) {
 			states.get(i).setVisited(false);
 		}
-		
+
 		boolean[] visited = new boolean[states.size()];
 		Stack<State> stack = new Stack<State>();
 		State firstState = states.get(0);
@@ -95,10 +96,10 @@ public class Automaton {
 					stack.push(s);
 				}
 			}
-			
+
 		}
 	}
-	
+
 
 	public void generateMealyAutomaton(String pstates, String prelations) {
 
@@ -140,7 +141,7 @@ public class Automaton {
 		connectStatesRelations();
 
 	}
-	
+
 	public State searchState(String name) {
 		State found = null;
 		for(State s : states) {
@@ -150,24 +151,24 @@ public class Automaton {
 		}
 		return found;
 	}
-	
+
 	public void connectStatesRelations(){
 		for(int i=0;i<states.size();i++) {
 			for(int j=0;j<relations.size();j++) {
 				State state = states.get(i);
-					if(state == relations.get(j).getSourceState()) {
-						states.get(i).getOutputs().add(relations.get(j));
-					}
-					if(state == relations.get(j).getDestinationState()) {
-						states.get(i).getInputs().add(relations.get(j));
-					}
-				
+				if(state == relations.get(j).getSourceState()) {
+					states.get(i).getOutputs().add(relations.get(j));
+				}
+				if(state == relations.get(j).getDestinationState()) {
+					states.get(i).getInputs().add(relations.get(j));
+				}
+
 			}
 		}
 	}
-	
+
 	public void removeInaccessibleStates() {
-		
+
 		dfs();
 		for(int i=0;i<states.size();i++) {
 			if(states.get(i).getInputs() == null  || !states.get(i).getVisited()) {
@@ -177,23 +178,71 @@ public class Automaton {
 			}
 		}
 	}
-	
+	/**
+	 * Nota importAnte: La creación de este metodo fue influenciado por la explicación de Fernanda Rojas de como funciona el algoritmo <br>
+	 * El metodo hace la primera partición para el AFD<br> 
+	 * @author Alexander Samacá, Alejandro Arce y Fernanda Rojas <br>
+	 * @return Primera partición del AFD<br>
+	 */
 	public ArrayList<ArrayList<State>> getFirstPartition(){
-		
+
 		removeInaccessibleStates();
-		ArrayList<State> cState = 
-		
-		
-		ArrayList<State> flagState =
-		return null;
-		
-		
-		
+		ArrayList<State> cState = states;
+
+		for (int i = 0; i < states.size(); i++) {
+
+			cState.get(i).setVisited(false);
+		}
+
+
+		ArrayList<ArrayList<State>> result = new ArrayList<>();
+
+		ArrayList<State> brick;
+
+
+		int counter = 0;
+
+		for(int i= 0 ; i < cState.size()-1; i++) {	
+
+
+			if (!cState.get(i).getVisited()) {	
+
+				cState.get(i).setValue(""+counter);
+				///cState.get(i).set(); Aqui deberia cambiar el anterior por si mismo, pero no entendi bien por qué
+				cState.get(i).setVisited(true);
+				brick = new ArrayList<State>();
+				brick.add(cState.get(i));
+
+				for (int j = 0; j < cState.size(); j++) {
+
+					if(!cState.get(j).getVisited()) {
+						String prev = String.valueOf(cState.get(i).getInputs());
+						String act = String.valueOf(cState.get(j).getInputs());
+
+						if(prev.equals(act)) {
+
+						}
+
+					}
+
+				}
+				result.add(brick);
+				counter++;
+
+
+
+			}
+			
+		}
+		return result;
+
+
+
 	}
 
-	
-	
-	
+
+
+
 
 
 }
