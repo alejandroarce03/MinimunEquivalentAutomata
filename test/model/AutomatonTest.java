@@ -55,6 +55,15 @@ class AutomatonTest {
 		assertEquals(automaton.getStates().get(1).getOutputs().get(0).getDestinationState().getName(),"q1");
 		
 	}
+	
+	@Test
+	void testEliminateInaccessibleStates() {
+		setup2();
+		
+		automaton.removeInaccessibleStates();
+		assertEquals(automaton.getStates().get(0).getName(),"q0");
+		assertEquals(automaton.getStates().get(0),null);
+	}
 
 
 }

@@ -13,7 +13,7 @@ public class Automaton {
 	private ArrayList<Relation> relations;
 	private String type;
 	private HashMap<State, Integer> statesAutomaton;
-
+	private boolean[] visited;
 
 
 
@@ -81,18 +81,21 @@ public class Automaton {
 			states.get(i).setVisited(false);
 		}
 
-		boolean[] visited = new boolean[states.size()];
+		visited = new boolean[states.size()-1];
 		Stack<State> stack = new Stack<State>();
 		State firstState = states.get(0);
 		stack.push(firstState);
 		int i = 0;
-		while (!stack.isEmpty()){
+		while (!stack.isEmpty() && i<visited.length){
 			State curr = stack.pop();
+			System.out.println("visi"+i);
+			System.out.println("stat"+states.size());
 			visited[i] = true;
 			states.get(i).setVisited(true);
 			i++;
 			for (State s : curr.getSuccessors()) {
 				if (!s.getVisited()) {
+					System.out.println("No entra");
 					stack.push(s);
 				}
 			}
@@ -168,11 +171,16 @@ public class Automaton {
 	public void removeInaccessibleStates() {
 
 		dfs();
+		for(int i=0;i<visited.length;i++) {
+			System.out.println("visitado "+visited[i]);
+		}
 		for(int i=0;i<states.size();i++) {
 			if(states.get(i).getInputs() == null  || !states.get(i).getVisited()) {
 				//relations.removeAll(states.get(i).getOutputs());
 				states.get(i).getOutputs().clear();
 				states.remove(i);
+				System.out.println("AKI");
+				System.out.println(i);
 			}
 		}
 	}
