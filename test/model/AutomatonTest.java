@@ -16,7 +16,7 @@ class AutomatonTest {
 	}
 	
 	public void setup2() {	
-		automaton = new Automaton("Mealy","q0;q1;q2","0,0,q0,q1;1,0,q0,q2;1,0,q2,q2;0,0,q1,q1;1,1,q1,q2;0,1,q2,q1");
+		automaton = new Automaton("Moore","q0,0;q1,1;q2,0","0,q0,q1;0,q0,q2;0,q1,q1;1,q1,q2;0,q2,q1;1,q2,q2");
 	}
 
 	@Test
@@ -35,7 +35,26 @@ class AutomatonTest {
 		assertEquals(automaton.getStates().get(1).getOutputs().get(0).getSourceState().getName(),"q1");
 		assertEquals(automaton.getStates().get(1).getOutputs().get(0).getDestinationState().getName(),"q1");
 	}
-	
+	@Test
+	void testMooreAutomaton() {
+		setup2();
+		
+		assertEquals(automaton.getStates().get(0).getName(),"q0");
+		assertEquals(automaton.getStates().get(0).getValue(),"0");
+		assertEquals(automaton.getStates().get(1).getName(),"q1");
+		assertEquals(automaton.getStates().get(1).getValue(),"1");
+		assertEquals(automaton.getStates().get(2).getName(),"q2");
+		assertEquals(automaton.getStates().get(2).getValue(),"0");
+		
+		assertEquals(automaton.getRelations().get(0).getInput(),"0");
+		assertEquals(automaton.getRelations().get(0).getOutput(),null);
+		
+		assertEquals(automaton.getStates().get(1).getInputs().size(),3);
+		assertEquals(automaton.getStates().get(0).getOutputs().get(0).getSourceState().getName(),"q0");
+		assertEquals(automaton.getStates().get(1).getOutputs().get(0).getSourceState().getName(),"q1");
+		assertEquals(automaton.getStates().get(1).getOutputs().get(0).getDestinationState().getName(),"q1");
+		
+	}
 
 
 }
