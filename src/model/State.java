@@ -18,6 +18,8 @@ public class State {
 
 	public State(String n) {
 		name = n;
+		inputs = new ArrayList<>();
+		outputs = new ArrayList<>();
 	}
 
 	public String getName() {
@@ -72,5 +74,12 @@ public class State {
 	public void addSuccesor(Relation s) {
 		outputs.add(s);
 		
+	}
+	
+	public void addInputRelations(Relation r) {
+		inputs.add(r);
+	}
+	public void addOutputRelations(Relation r) {
+		outputs.add(r);
 	}
 }

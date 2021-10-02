@@ -102,17 +102,15 @@ public class Automaton {
 
 
 	public void generateMealyAutomaton(String pstates, String prelations) {
-
 		String[] statesStrings = pstates.split(";");
-
-		for(int i=0;i>statesStrings.length;i++) {
+		for(int i=0;i<statesStrings.length;i++) {
 			State s = new State(statesStrings[i]);
 			states.add(s);
 		}
 
 		String[] relationsStrings = prelations.split(";");
 
-		for(int i=0;i>relationsStrings.length;i++) {
+		for(int i=0;i<relationsStrings.length;i++) {
 			String[] relationsInOut = relationsStrings[i].split(",");
 			Relation r = new Relation(relationsInOut[0],relationsInOut[1],searchState(relationsInOut[2]),searchState(relationsInOut[3]));
 			relations.add(r);
@@ -125,7 +123,7 @@ public class Automaton {
 
 		String[] statesStrings = pstates.split(";");
 
-		for(int i=0;i>statesStrings.length;i++) {
+		for(int i=0;i<statesStrings.length;i++) {
 			String[] statesNameValue = statesStrings[i].split(",");
 			State s = new State(statesNameValue[0],statesNameValue[1]);
 			states.add(s);
@@ -133,7 +131,7 @@ public class Automaton {
 
 		String[] relationsStrings = prelations.split(";");
 
-		for(int i=0;i>relationsStrings.length;i++) {
+		for(int i=0;i<relationsStrings.length;i++) {
 			String[] relationsInOut = relationsStrings[i].split(",");
 			Relation r = new Relation(relationsInOut[0],searchState(relationsInOut[1]),searchState(relationsInOut[2]));
 			relations.add(r);
@@ -157,10 +155,10 @@ public class Automaton {
 			for(int j=0;j<relations.size();j++) {
 				State state = states.get(i);
 				if(state == relations.get(j).getSourceState()) {
-					states.get(i).getOutputs().add(relations.get(j));
+					states.get(i).addOutputRelations(relations.get(j));
 				}
 				if(state == relations.get(j).getDestinationState()) {
-					states.get(i).getInputs().add(relations.get(j));
+					states.get(i).addInputRelations(relations.get(j));
 				}
 
 			}
