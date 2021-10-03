@@ -445,7 +445,7 @@ public class Automaton {
 			}
 
 		}	
-		if (parts == result) {
+		if (parts.equals( result)) {
 			return result;
 		}else {
 			return partitioningN(result);
@@ -512,6 +512,15 @@ public class Automaton {
 
 
 
+	}
+	public boolean compare ( ArrayList<ArrayList<State>> a,  ArrayList<ArrayList<State>> b) {
+		boolean result = false;
+		
+		return result;
+		
+		
+		
+			
 	}
 
 
