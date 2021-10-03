@@ -7,9 +7,13 @@ public class State {
 	private String value;
 	private ArrayList<Relation> inputs;
 	private ArrayList<Relation> outputs;
+	//private ArrayList<String> inputs;
+	//private ArrayList<String> outputs;
+	
 	private boolean visited;
 	
 	public State(String n,String v) {
+		//Moore
 		name = n;
 		value = v;
 		inputs = new ArrayList<>();
@@ -17,6 +21,7 @@ public class State {
 	}
 
 	public State(String n) {
+		//Mealy
 		name = n;
 		inputs = new ArrayList<>();
 		outputs = new ArrayList<>();

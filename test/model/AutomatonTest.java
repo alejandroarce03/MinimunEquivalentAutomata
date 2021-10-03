@@ -12,11 +12,14 @@ class AutomatonTest {
 	private Automaton automaton;
 	
 	public void setup1() {	
-		automaton = new Automaton("Mealy","q0;q1;q2","0,0,q0,q1;1,0,q0,q2;1,0,q2,q2;0,0,q1,q1;1,1,q1,q2;0,1,q2,q1");
+		automaton = new Automaton("Mealy","q0;q1;q2","0,0,q0,q1;1,0,q0,q2;0,0,q1,q1;1,1,q1,q2;0,1,q2,q1;1,0,q2,q2");
 	}
 	
 	public void setup2() {	
-		automaton = new Automaton("Moore","q0,0;q1,1;q2,0","0,q0,q1;0,q0,q2;0,q1,q1;1,q1,q2;0,q2,q1;1,q2,q2");
+		automaton = new Automaton("Moore","q0,0;q1,1;q2,0;q3,0","0,q0,q1;1,q0,q2;0,q1,q1;1,q1,q2;0,q2,q1;1,q2,q2;0,q3,q0;1,q3,q2");
+	}
+	public void setup3() {
+		automaton = new Automaton("Mealy","A;B;C;D;E;F;G;H","0,0,A,B;1,0,A,C;0,0,B,A;1,0,B,D;0,0,C,E;1,0,C,C;0,0,D,E;1,0,D,C;0,0,E,A;1,0,E,G;0,0,F,D;1,0,F,A;0,0,G,E;1,1,G,H;0,1,H,H;1,1,H,H");
 	}
 
 	@Test
@@ -62,8 +65,25 @@ class AutomatonTest {
 		
 		automaton.removeInaccessibleStates();
 		assertEquals(automaton.getStates().get(0).getName(),"q0");
-		assertEquals(automaton.getStates().get(0),null);
+		assertEquals(automaton.getStates().size(),3);
 	}
+	/**
+	@Test
+	void testFirstPartitionMoore() {
+		setup2();
+		
+		ArrayList<ArrayList<State>> r = automaton.getFirstPartition();
+		System.out.println(r);
+	}
+	*/
+	@Test 
+	void testFirstPartitionMealy() {
+		setup3();
+		
+		ArrayList<ArrayList<State>> r = automaton.getFirstPartition();
+		System.out.println(r);
+	}
+	
 
 
 }
