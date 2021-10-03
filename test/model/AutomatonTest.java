@@ -21,6 +21,9 @@ class AutomatonTest {
 	public void setup3() {
 		automaton = new Automaton("Mealy","A;B;C;D;E;F;G;H","0,0,A,B;1,0,A,C;0,0,B,A;1,0,B,D;0,0,C,E;1,0,C,C;0,0,D,E;1,0,D,C;0,0,E,A;1,0,E,G;0,0,F,D;1,0,F,A;0,0,G,E;1,1,G,H;0,1,H,H;1,1,H,H");
 	}
+	public void setup4() {
+		automaton = new Automaton("Moore","A,0;B,1;C,0;D,0;E,0;F,0","0,A,B;1,A,D;0,B,C;1,B,E;0,C,B;1,C,F;0,D,E;1,D,A;0,E,F;1,E,B;0,F,E;1,F,C");
+	}
 
 	@Test
 	void testMealyAutomaton() {
@@ -82,6 +85,14 @@ class AutomatonTest {
 		
 		ArrayList<ArrayList<State>> r = automaton.getFirstPartition();
 		System.out.println(r);
+	}
+	@Test
+	void TestPartitionMoore() {
+		setup4();
+		ArrayList<ArrayList<State>> ecaResult = automaton.obtainECA(automaton);
+		ArrayList<ArrayList<State>> partitionFull = automaton.partioningFull(automaton);
+		System.out.println(ecaResult);
+		System.out.println(partitionFull);
 	}
 	
 
