@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 class AutomatonTest {
 	
 	private Automaton automaton;
+
 	
 	public void setup1() {	
 		automaton = new Automaton("Mealy","q0;q1;q2","0,0,q0,q1;1,0,q0,q2;0,0,q1,q1;1,1,q1,q2;0,1,q2,q1;1,0,q2,q2");

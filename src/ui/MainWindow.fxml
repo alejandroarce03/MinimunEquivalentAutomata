@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17">
+  <tabs>
+    <Tab text="Mealy">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutX="14.0" layoutY="52.0" prefHeight="287.0" prefWidth="224.0">
+                     <children>
+                        <Label prefHeight="22.0" prefWidth="181.0" text="Enter states of the automaton" />
+                        <Label text="The first state is the inicial state" />
+                        <TextField promptText="q0;q1;q2;q3" />
+                        <Label prefHeight="22.0" prefWidth="137.0" text="Enter relations " />
+                        <Label prefHeight="22.0" prefWidth="222.0" text="Format: input,output,srcState,destState" />
+                        <TextField promptText="0,1,q0,q1;1,1,q1,q2" />
+                        <Button mnemonicParsing="false" text="Show automaton" />
+                        <Button mnemonicParsing="false" text="Generate minimun equivalent automaton" />
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Moore">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>
